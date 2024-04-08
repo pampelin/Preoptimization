@@ -31,6 +31,24 @@ json.dump(bonds, open("bonds_raw.json", 'w'))
 ###Konec vypisování co mám v JSON
 
 
+with open('bonds_raw.json', 'r') as file:
+    bonds_data = json.load(file)
+
+# Výpočet průměrných délek vazeb
+average_bonds_lengths = {}
+for bond_key, lengths in bonds_data.items():
+    average_length = np.mean(lengths)
+    average_bonds_lengths[bond_key] = average_length
+
+# Uložení průměrů do nového JSON souboru
+output_path = 'average_bonds_lengths.json'
+with open(output_path, 'w') as file:
+    json.dump(average_bonds_lengths, file)
+
+print(f'Průměrné délky vazeb byly uloženy do souboru: {output_path}')
+
+
+###Grafy, které se mi nedaří vykreslit
 #file_path = 'bonds_raw.json'
 #df = pd.read_json(file_path)
 
@@ -46,7 +64,7 @@ json.dump(bonds, open("bonds_raw.json", 'w'))
 #plt.ylabel(y_column)
 #plt.show()
 
-
+##další zkouška
 #with open('bonds_raw.json', 'r') as file:
 #    data = json.load(file)
 #    numpy_array = np.array(data)
@@ -64,18 +82,3 @@ json.dump(bonds, open("bonds_raw.json", 'w'))
 #
 #plt.show()
 
-with open('bonds_raw.json', 'r') as file:
-    bonds_data = json.load(file)
-
-# Výpočet průměrných délek vazeb
-average_bonds_lengths = {}
-for bond_key, lengths in bonds_data.items():
-    average_length = np.mean(lengths)
-    average_bonds_lengths[bond_key] = average_length
-
-# Uložení průměrů do nového JSON souboru
-output_path = 'average_bonds_lengths.json'
-with open(output_path, 'w') as file:
-    json.dump(average_bonds_lengths, file)
-
-print(f'Průměrné délky vazeb byly uloženy do souboru: {output_path}')
